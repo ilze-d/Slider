@@ -1,0 +1,55 @@
+html, body
+{
+    height: 100%;
+}
+
+.white-gray-gradient {
+    background: -webkit-linear-gradient(#ffffff, #bebebe); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffffff, #bebebe); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffffff, #bebebe); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffffff, #bebebe); /* Standard syntax (must be last) */
+}
+
+/*-----------------------------------------------------------------------------------
+                              slider styles 
+-----------------------------------------------------------------------------------*/
+
+.main-slider{
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide{
+  width: 60%;
+  float: left;
+  display: none;
+  opacity: 1;
+  opacity: 0.5;
+}
+
+.slide:first-child, .slide:nth-child(2), .slide:nth-child(3){
+  display: block;
+}
+
+.slide:nth-child(2){
+  margin-left: 20%;
+  opacity: 1;
+}
+
+.slide:first-child, .slide:nth-child(3){
+  position: absolute;
+}
+
+.slide:first-child {
+  margin-left: -42%;
+}
+
+.slide:nth-child(3) {
+  margin-left: 82%;
+}
+
+.slide img{
+  width: 100%;
+  height: auto;
+}
