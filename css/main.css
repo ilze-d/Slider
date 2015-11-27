@@ -1,8 +1,10 @@
-html, body
-{
-    height: 100%;
-}
 
+.container{
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+    padding: 25px 5px 10px 5px;
+}
 .white-gray-gradient {
     background: -webkit-linear-gradient(#ffffff, #bebebe); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#ffffff, #bebebe); /* For Opera 11.1 to 12.0 */
@@ -16,40 +18,94 @@ html, body
 
 .main-slider{
   width: 100%;
+    margin: 0 auto;
   overflow: hidden;
-  position: relative;
+    position: relative;
 }
 
-.slide{
-  width: 60%;
-  float: left;
-  display: none;
-  opacity: 1;
-  opacity: 0.5;
+.slide-track{
+    position:relative;
+    right: 0;
 }
 
-.slide:first-child, .slide:nth-child(2), .slide:nth-child(3){
-  display: block;
+.slide-track > div {
+  width: 80%;
+    margin: 0 auto;
 }
 
-.slide:nth-child(2){
-  margin-left: 20%;
-  opacity: 1;
+/*the page to look good with js disabled*/
+.main-slider .slide-track > div {
+    float: left;
 }
 
-.slide:first-child, .slide:nth-child(3){
-  position: absolute;
+.main-slider .slide-track > div {
+    opacity: 0.5;
+    transition: opacity 0.5s;
 }
 
-.slide:first-child {
-  margin-left: -42%;
+.slide-track > div.active-slide{
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
-.slide:nth-child(3) {
-  margin-left: 82%;
+/*-----slider navigation (left-right)-----*/
+.arrow-next, .arrow-previous{
+    padding: 10% 0;
+    position: absolute;
+    height: 100%;
+    color: white;
+    width: 10%;
+    text-align: center;
+    font-size: 2em;
+    opacity: 0;
+    cursor: pointer;
+}
+.arrow-next{
+    right: 0;
+    transition: opacity 0.5s;
+}
+.arrow-next:hover, .arrow-previous:hover {
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
-.slide img{
-  width: 100%;
-  height: auto;
+/*-----slider navigation (bottom buttons bullets)-----*/
+.slider-buttons{
+    width: 100%;
+    text-align: center;
+}
+
+.slider-buttons button{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 1px solid gray;
+    background: gainsboro;
+    transition: background 0.5s;
+    outline: none;
+}
+.slider-buttons button.active{
+    background: gray;
+    transition: background 0.5s;
+}
+
+/*-----------------------------------------------------------------------------------
+                              slide content styles
+-----------------------------------------------------------------------------------*/
+.main-slider img{
+    width: 100%;
+    height: auto;
+}
+
+.slide-container{
+    padding: 5px;
+    position: relative;
+}
+.slide-text-box{
+
+}
+h1{
+    color: white;
+    position: absolute;
 }
