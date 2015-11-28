@@ -1,4 +1,18 @@
+/*normalize*/
+h1, h2, h3, h4, h5, h6, p, body {
+    margin: 0;
+}
 
+
+
+html, body{
+    min-height: 100%;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;
+}
 .container{
     box-sizing: border-box;
     width: 80%;
@@ -84,6 +98,7 @@
     background: white;
     transition: background 0.5s;
     outline: none;
+    cursor: pointer;
 }
 .slider-buttons button.active{
     background: #474747;
@@ -103,9 +118,9 @@
     position: relative;
 }
 .slide-text-box{
-
-}
-h1{
-    color: white;
+    box-sizing: border-box;
     position: absolute;
+    color: white;
+    padding: 30px;
+    bottom: 0;
 }

@@ -12,18 +12,31 @@ function slider(sliderContainer){
     var blockAnimation = false;
     var activeButton = 1;
 
-    //listen for shrinking window
-    $(window).resize(function() {
-        //resize just happened, pixels changed
-    });
-
+    //make slider
     $(".slide-track > div").width(slideLength);
     $(".slide-track").width(trackLength);
-    $(".slide-track").css( {"right" : translateLeft, "transition":"right 1s"});
+    $(".slide-track").css( {"right" : translateLeft, "transition":"right 0.5s"});
     $(sliderContainer).addClass("main-slider");
     buildSliderbuttons();
     $(".slide-track > div:last-child").prependTo(".slide-track");
     $(".slide-track > div:nth-child(2)").addClass("active-slide");
+
+
+    //resize slider when window width changed
+    $(window).resize(function() {
+        if(this.resizeTO) clearTimeout(this.resizeTO);
+        this.resizeTO = setTimeout(function() {
+            sliderContainerWidth = $(sliderContainer).width();
+            slideCount = $(sliderContainer +  ' .slide-track > div').length;
+            slideLength = sliderContainerWidth * 0.8;
+            trackLength = slideLength * slideCount;
+            translateLeft = slideLength * 0.8765;
+            $(".slide-track > div").width(slideLength);
+            $(".slide-track").width(trackLength);
+            $(".slide-track").css( {"right" : translateLeft, "transition":""});
+            $(this).trigger('resizeEnd');
+        }, 500);
+    });
 
     $( ".arrow-next" ).click(function() {
         slideRight();
