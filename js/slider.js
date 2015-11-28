@@ -12,14 +12,18 @@ function slider(sliderContainer){
     var blockAnimation = false;
     var activeButton = 1;
 
+    //listen for shrinking window
+    $(window).resize(function() {
+        //resize just happened, pixels changed
+    });
+
     $(".slide-track > div").width(slideLength);
     $(".slide-track").width(trackLength);
     $(".slide-track").css( {"right" : translateLeft, "transition":"right 1s"});
     $(sliderContainer).addClass("main-slider");
+    buildSliderbuttons();
     $(".slide-track > div:last-child").prependTo(".slide-track");
     $(".slide-track > div:nth-child(2)").addClass("active-slide");
-
-    buildSliderbuttons();
 
     $( ".arrow-next" ).click(function() {
         slideRight();
@@ -43,7 +47,7 @@ function slider(sliderContainer){
             translateLeft = translateLeft + slideLength;
             $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
             $(".slide-track > div").removeClass("active-slide");
-            var thisBottomButton = $(".slide-track > div:nth-child(2)").attr('class');
+            var thisBottomButton = $(".slide-track > div:nth-child(3)").attr('class');
             $(".slider-buttons button").removeClass("active");
             activeButton = thisBottomButton.split("-").pop();
             $(".slider-buttons ." + thisBottomButton).addClass("active");
@@ -57,7 +61,7 @@ function slider(sliderContainer){
         if(blockAnimation != true) {
             blockAnimation = true;
             $(".slide-track > div").removeClass("active-slide");
-            var thisBottomButton = $(".slide-track > div:last-child").attr('class');
+            var thisBottomButton = $(".slide-track > div:first-child").attr('class');
             $(".slider-buttons button").removeClass("active");
             activeButton = thisBottomButton.split("-").pop();
             $(".slider-buttons ." + thisBottomButton).addClass("active");
@@ -74,53 +78,46 @@ function slider(sliderContainer){
 
     }
 
-    function slideToLeft(toCount){
+    function slideToLeft( toCount , thisSlide ){
 
         if(blockAnimation != true) {
             blockAnimation = true;
             $(".slide-track > div").removeClass("active-slide");
+            translateLeft = translateLeft - slideLength * toCount;
+            $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
+            activeButton = thisSlide;
+            thisSlide = ".slide-" + thisSlide;
+            $(".slide-track > div" + thisSlide).addClass("active-slide");
 
 
-            //var thisBottomButton = $(".slide-track > div:first-child").attr('class');
-            //$(".slider-buttons button").removeClass("active");
-            //activeButton = thisBottomButton.split("-").pop();
-            //$(".slider-buttons ." + thisBottomButton).addClass("active");
-
-            //$(".slide-track > div:first-child").addClass("active-slide");
-            //$(".slide-track > div:last-child").prependTo('.slide-track');
-
-            translateLeft = translateLeft + slideLength;
-            $(".slide-track").css({"right": translateLeft, "transition": ""});
             window.setTimeout( function() { //workaround css3 transition
-                translateLeft = translateLeft - slideLength;
-                $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
-            }, 10);
-            //window.setTimeout(loopSliderLeft, 500);
+                 translateLeft = translateLeft + slideLength * toCount;
+                $(".slide-track").css({"right": translateLeft, "transition": ""});
+                for (i = 0; i < toCount; i++) { $(".slide-track > div:last-child").prependTo('.slide-track'); }
+                loopSliderLeft();
+            }, 501);
         }
-
     }
 
     function slideToRight(toCount,thisSlide){
 
         if(blockAnimation != true) {
             blockAnimation = true;
-            for (i = 0; i < toCount; i++) { $(".slide-track > div:first-child").appendTo('.slide-track'); }
-
-            translateLeft = translateLeft + slideLength;
-            $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
-
             $(".slide-track > div").removeClass("active-slide");
-            //var thisBottomButton = $(".slide-track > div:nth-child(2)").attr('class');
-            //$(".slider-buttons button").removeClass("active");
-            //activeButton = thisBottomButton.split("-").pop();
-            //$(".slider-buttons ." + thisBottomButton).addClass("active");
-            $(".slide-track > div:nth-child(2)").addClass("active-slide");
+            translateLeft = translateLeft + slideLength * toCount;
+            $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
+            activeButton = thisSlide;
+            thisSlide = ".slide-" + thisSlide;
+            $(".slide-track " + thisSlide).addClass("active-slide");
 
-            //window.setTimeout(loopSlider, 500);
-           // setTimeout(function(){  for (i = 1; i < toCount+1; i++) { $(".slide-track >
-           // div:first-child").appendTo('.slide-track'); }}, 500);
+
+            window.setTimeout( function() { //workaround css3 transition
+                 translateLeft = translateLeft - slideLength * toCount;
+                $(".slide-track").css({"right": translateLeft, "transition": ""});
+                for (i = 0; i < toCount; i++) { $(".slide-track > div:first-child").appendTo('.slide-track'); }
+                blockAnimation = false;
+            }, 501);
         }
-
     }
 
     function loopSlider(){
@@ -136,35 +133,24 @@ function slider(sliderContainer){
 
     function buildSliderbuttons(){
         $( sliderContainer ).append( "<div class='slider-buttons'></div>" );
-        for (i = 0; i < slideCount+1; i++) {
+        for (i = 1; i < slideCount+1; i++) {
             var slideNavClass = 'slide-'+i;
             $( sliderContainer + " .slider-buttons" ).append( "<button class='"+slideNavClass+"'></button>" );
             $( sliderContainer + " .slide-track > div:nth-child("+i+")").addClass(slideNavClass);
         }
-        //$(".slider-buttons button:first-child").appendTo(".slider-buttons");
         var activeSliderButton = $(".slider-buttons button:first-child");
         activeSliderButton.addClass("active");
     }
 
     function navigateToSlide( toSlide ){
-        console.log("activebutton was "+activeButton);
-        console.log(toSlide);
-
         if( activeButton > toSlide ){
             var howMany = activeButton - toSlide;
-            //console.log("to left " + howMany);
-            //console.log(howMany);
-            //slideToLeft(howMany)
+            slideToLeft(howMany,toSlide)
         }
         else if( activeButton < toSlide ){
-
             var howMany = toSlide - activeButton;
-            //console.log("to rigt " + howMany);
-            console.log("this many "+howMany);
             slideToRight(howMany,toSlide)
-        }else{
-            //alert("error");
-        }
-
+        }else{}
     }
 }
+//should vave used an array...

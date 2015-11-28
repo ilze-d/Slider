@@ -80,13 +80,13 @@
     width: 20px;
     border-radius: 50%;
     margin: 10px;
-    border: 1px solid gray;
-    background: gainsboro;
+    border: 1px solid #474747;
+    background: white;
     transition: background 0.5s;
     outline: none;
 }
 .slider-buttons button.active{
-    background: gray;
+    background: #474747;
     transition: background 0.5s;
 }
 
