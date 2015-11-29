@@ -8,7 +8,7 @@ function slider(sliderContainer){
     var slideCount = $(sliderContainer +  ' .slide-track > div').length;
     var slideLength = sliderContainerWidth * 0.8;
     var trackLength = slideLength * slideCount;
-    var translateLeft = slideLength * 0.8765;
+    var translateLeft = slideLength * 0.875;
     var blockAnimation = false;
     var activeButton = 1;
 
@@ -46,6 +46,14 @@ function slider(sliderContainer){
         slideLeft();
     });
 
+    $(".main-slider").on("swiperight",function(){
+        slideLeft();
+    });
+
+    $(".main-slider").on("swipeleft",function(){
+        slideRight();
+    });
+
     $( ".slider-buttons button" ).click(function() {
         $( ".slider-buttons button").removeClass("active");
         var selectedButtonSlide = $(this).attr('class');
@@ -70,7 +78,6 @@ function slider(sliderContainer){
     }
 
     function slideLeft(){
-
         if(blockAnimation != true) {
             blockAnimation = true;
             $(".slide-track > div").removeClass("active-slide");
@@ -101,8 +108,6 @@ function slider(sliderContainer){
             activeButton = thisSlide;
             thisSlide = ".slide-" + thisSlide;
             $(".slide-track > div" + thisSlide).addClass("active-slide");
-
-
             window.setTimeout( function() { //workaround css3 transition
                  translateLeft = translateLeft + slideLength * toCount;
                 $(".slide-track").css({"right": translateLeft, "transition": ""});
@@ -122,8 +127,6 @@ function slider(sliderContainer){
             activeButton = thisSlide;
             thisSlide = ".slide-" + thisSlide;
             $(".slide-track " + thisSlide).addClass("active-slide");
-
-
             window.setTimeout( function() { //workaround css3 transition
                  translateLeft = translateLeft - slideLength * toCount;
                 $(".slide-track").css({"right": translateLeft, "transition": ""});
@@ -166,4 +169,4 @@ function slider(sliderContainer){
         }else{}
     }
 }
-//should vave used an array...
+//should have used an array...
