@@ -102,18 +102,18 @@ function slider(sliderContainer){
 
         if(blockAnimation != true) {
             blockAnimation = true;
+            for (i = 0; i < toCount; i++) { $(".slide-track > div:last-child").prependTo('.slide-track'); }
             $(".slide-track > div").removeClass("active-slide");
-            translateLeft = translateLeft - slideLength * toCount;
-            $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
+            translateLeft = translateLeft + slideLength * toCount;
+            $(".slide-track").css({"right": translateLeft, "transition": ""});
             activeButton = thisSlide;
             thisSlide = ".slide-" + thisSlide;
             $(".slide-track > div" + thisSlide).addClass("active-slide");
             window.setTimeout( function() { //workaround css3 transition
-                 translateLeft = translateLeft + slideLength * toCount;
-                $(".slide-track").css({"right": translateLeft, "transition": ""});
-                for (i = 0; i < toCount; i++) { $(".slide-track > div:last-child").prependTo('.slide-track'); }
+                 translateLeft = translateLeft - slideLength * toCount;
+                $(".slide-track").css({"right": translateLeft, "transition": "0.5s"});
                 loopSliderLeft();
-            }, 501);
+            }, 1);
         }
     }
 
@@ -121,6 +121,10 @@ function slider(sliderContainer){
 
         if(blockAnimation != true) {
             blockAnimation = true;
+            if(toCount>2){
+                for (i = 0; i < 2; i++) { $(".slide-track > div:first-child").appendTo('.slide-track'); }
+                toCount = toCount - 2;
+            }
             $(".slide-track > div").removeClass("active-slide");
             translateLeft = translateLeft + slideLength * toCount;
             $(".slide-track").css({"right": translateLeft, "transition": "right 0.5s"});
@@ -133,6 +137,7 @@ function slider(sliderContainer){
                 for (i = 0; i < toCount; i++) { $(".slide-track > div:first-child").appendTo('.slide-track'); }
                 blockAnimation = false;
             }, 501);
+
         }
     }
 
