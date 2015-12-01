@@ -3,6 +3,8 @@ h1, h2, h3, h4, h5, h6, p, body {
     margin: 0;
 }
 
+/*some default styling*/
+
 html, body{
     min-height: 100%;
 }
@@ -11,12 +13,14 @@ body{
     font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
 }
+
 .container{
     box-sizing: border-box;
     width: 80%;
     margin: 0 auto;
     padding: 25px 5px 10px 5px;
 }
+
 .white-gray-gradient {
     background: -webkit-linear-gradient(#ffffff, #bebebe); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#ffffff, #bebebe); /* For Opera 11.1 to 12.0 */
@@ -70,11 +74,6 @@ body{
 }
 .arrow-next{
     right: 0;
-    transition: opacity 0.5s;
-}
-.arrow-next:hover, .arrow-previous:hover {
-    opacity: 1;
-    transition: opacity 0.5s;
 }
 
 /*-----slider navigation (bottom buttons bullets)-----*/
@@ -94,24 +93,37 @@ body{
     outline: none;
     cursor: pointer;
 }
+
 .slider-buttons button.active{
     background: #474747;
     transition: background 0.5s;
 }
 
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+    .slider-buttons button{
+    height: 60px;
+    width: 60px;
+    margin: 40px;
+    border: 2px solid #474747;
+    }
+}
+
 /*-----------------------------------------------------------------------------------
                               slide content styles
 -----------------------------------------------------------------------------------*/
-.main-slider img{
+.main-slider img {
     width: 100%;
     height: auto;
 }
 
-.slide-container{
+.slide-container {
     padding: 5px;
     position: relative;
 }
-.slide-text-box{
+
+.slide-text-box {
     box-sizing: border-box;
     position: absolute;
     color: white;
@@ -120,9 +132,22 @@ body{
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.59);
 }
 
-.slide-text-box h2{
+.slide-text-box h2 {
     font-size: 2em;
 }
+
 .slide-text-box p {
     font-size: 1.3em;
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+    .slide-text-box h2 {
+        font-size: 5em;
+    }
+
+    .slide-text-box p {
+        font-size: 3.5em;
+    }
 }
