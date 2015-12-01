@@ -110,6 +110,17 @@ body{
     }
 }
 
+@media 
+(-webkit-min-device-pixel-ratio: 1.5), 
+(min-resolution: 192dpi) { 
+    .slider-buttons button{
+    height: 40px;
+    width: 40px;
+    margin: 20px;
+    border: 2px solid #474747;
+    }
+}
+
 /*-----------------------------------------------------------------------------------
                               slide content styles
 -----------------------------------------------------------------------------------*/
@@ -149,5 +160,17 @@ body{
 
     .slide-text-box p {
         font-size: 3.5em;
+    }
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 1.5), 
+(min-resolution: 192dpi) { 
+    .slide-text-box h2 {
+        font-size: 3em;
+    }
+
+    .slide-text-box p {
+        font-size: 2em;
     }
 }
