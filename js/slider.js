@@ -174,4 +174,3 @@ function slider(sliderContainer){
         }else{}
     }
 }
-//should have used an array...
